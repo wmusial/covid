@@ -92,4 +92,17 @@ We clean out outliers:
 * more than twice the mean of past three days
 
 
+# curve model
+
+This paper:
+https://www.nature.com/articles/srep35839
+
+fits various distributions to model the incubation period of MERS-CoV in south korea.
+Apparently Weibull and Gamma work best and are hardly distinguishable.
+Weibull is hard to integrate against, so we use gamma.
+
+![](covid.png)
+
+
+
 
