@@ -2,6 +2,7 @@ library(data.table)
 library(lubridate)
 library(ggplot2)
 library(VORtex)
+library(pracma)
 
 data.dt = as.data.table(read.csv("covid-confirmed-deaths-since-5th-death.csv"))
 names(data.dt) =  c('entity', 'code', 'date', 'deaths', 'days.since')
@@ -53,3 +54,16 @@ do.plot = function(data.dt, x.name, path = NULL) {
 		dev.off()
   }
 }
+
+
+deaths.m = dcast(peak.dt[!is.na(days.since)], entity ~ days.since, value.var = "d.deaths", fill=NA_real_)
+entities = deaths.m$entity
+deaths.m[, entity := NULL]
+deaths.m = as.matrix(deaths.m)
+rownames(deaths.m) = entities
+
+num.countries = nrow(deaths.m)
+num.dates = ncol(deaths.m)
+
+source("opt.R")
+#compute.deaths(2, 10, c(1,1), c(1,1), 1, 1, c(1,1), c(1,1))

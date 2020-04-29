@@ -103,6 +103,24 @@ Weibull is hard to integrate against, so we use gamma.
 
 ![](covid.png)
 
+This is now implemented in R and vectorized for evaluation during solving.
 
+# optimization
+
+We optimize mean squared distance between observed daily deaths and the curve model.
+
+For starters, we fix the incubation gamma distribution parameters to alpha=3/2, beta=4,
+and fix the before-lockdown growth rate to 0.1 and after-lockdown decay rate to 0.04.
+These were eye-balled from the data.
+These are not subject to optimization yet.
+
+We optimize over remaining country-specific parameters: peak number of deaths and time of lockdown.
+These are initialized to the maximum daily death rate, and the day it occurred.
+
+It sort of works.
+For most countries, the fit improves.
+France goes crazy.
+
+![](solution.png)
 
 
